@@ -25,7 +25,7 @@
 
 @property (copy, nonatomic) SKYRecord *record;
 @property (strong, nonatomic) NSString *creatorUserRecordID;
-@property (strong, nonatomic) NSDate *creationDate;
+@property (strong, nonatomic) NSDate * _Nullable creationDate;
 @property (strong, nonatomic, readonly) SKYRecordID *recordID;
 @property (strong, nonatomic, readonly) NSString *recordType;
 @property (strong, nonatomic, readonly) NSString *recordName;
