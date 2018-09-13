@@ -654,7 +654,7 @@ extension SKYChatConversationViewController {
         let textView = UITextView(frame: frame)
         textView.isEditable = false
         textView.isSelectable = false
-        textView.text = "Slide to Cancel"
+        textView.text = NSLocalizedString("vip_chat_voice_message_slide_to_cancel", comment: "")
         textView.backgroundColor = UIColor.clear
         textView.textColor = UIColor.darkGray
         return textView
