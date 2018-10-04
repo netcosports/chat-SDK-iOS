@@ -1283,7 +1283,12 @@ extension SKYChatConversationViewController {
             if cancelled {
                 self.didStopRecord(button: self.recordButton!, cancelled: true)
             } else if gesture.state == .ended && !cancelled {
-                self.didStopRecord(button: self.recordButton!)
+                if let audioTime = self.audioTime, audioTime > 1 {
+                    cancelled = false
+                } else {
+                    cancelled = true
+                }
+                self.didStopRecord(button: self.recordButton!, cancelled: cancelled)
             }
         }
     }
