@@ -1283,12 +1283,7 @@ extension SKYChatConversationViewController {
             if cancelled {
                 self.didStopRecord(button: self.recordButton!, cancelled: true)
             } else if gesture.state == .ended && !cancelled {
-                if let audioTime = self.audioTime, audioTime > 1 {
-                    cancelled = false
-                } else {
-                    cancelled = true
-                }
-                self.didStopRecord(button: self.recordButton!, cancelled: cancelled)
+                self.didStopRecord(button: self.recordButton!)
             }
         }
     }
@@ -1795,13 +1790,17 @@ extension SKYChatConversationViewController {
     func didStopRecord(button: UIButton, cancelled: Bool = false) {
         let recordingSession = AVAudioSession.sharedInstance()
         if recordingSession.recordPermission() == .granted {
-            print("Voice Recording: Stop recording \(cancelled ? "(cancelled)" : "")")
             self.inputToolbarSendButtonState = .record
-            self.isRecordingCancelled = cancelled
+            self.audioTime = self.audioRecorder?.currentTime
+            if let audioTime = self.audioTime, audioTime > 1.0 {
+                self.isRecordingCancelled = cancelled
+            } else {
+                self.isRecordingCancelled = true
+            }
+            print("Voice Recording: Stop recording \(self.isRecordingCancelled ? "(cancelled)" : "")")
             self.slideToCancelTextView?.removeFromSuperview()
             self.inputTextView?.isHidden = false
             self.inputToolbar?.contentView?.leftBarButtonItem?.isHidden = false
-            self.audioTime = self.audioRecorder?.currentTime
             DispatchQueue.global().async {
                 self.audioRecorder?.stop()
                 do {
