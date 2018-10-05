@@ -497,8 +497,10 @@ open class SKYChatConversationViewController: JSQMessagesViewController, AVAudio
     var recordButton: UIButton?
     var audioRecorder: AVAudioRecorder?
     var inputTextView: UITextView?
-    var slideToCancelTextView: UITextView?
+    var slideToCancelTextView: UIView?
+    var recordingTimeLabel: UILabel?
     var isRecordingCancelled: Bool = false
+    var recordTimer: Timer?
     var audioDict: [String: SKYChatConversationAudioItem] = [:]
     var audioTime: TimeInterval?
     var indicator: UIActivityIndicatorView?
@@ -536,6 +538,16 @@ open class SKYChatConversationViewController: JSQMessagesViewController, AVAudio
         }
 
         super.awakeFromNib()
+    }
+    
+    private func invalidateRecordingTimer() {
+        self.recordTimer?.invalidate()
+        self.recordTimer = nil
+        print("Voice Recording: deinit")
+    }
+    
+    deinit {
+        invalidateRecordingTimer()
     }
 }
 
@@ -650,14 +662,29 @@ extension SKYChatConversationViewController {
 // MARK: - Rendering
 
 extension SKYChatConversationViewController {
-    func createSlideToCancelTextView(_ frame: CGRect) -> UITextView {
-        let textView = UITextView(frame: frame)
+    func createSlideToCancelTextView(_ frame: CGRect) -> UIView {
+        let containerView = UIView(frame: frame)
+        let timeViewFrameWidth: CGFloat = 70
+        let timeViewFrame = CGRect(x: 0, y: 0, width: timeViewFrameWidth, height: frame.size.height)
+        let timeView = UIView(frame: timeViewFrame)
+        let textLabel = UILabel(frame: timeViewFrame)
+        textLabel.text = "00:00"
+        textLabel.textAlignment = .center
+        textLabel.textColor = UIColor.darkGray
+        timeView.addSubview(textLabel)
+        containerView.addSubview(timeView)
+        self.recordingTimeLabel = textLabel
+        
+        let slideToCancelFrame = CGRect(x: timeViewFrameWidth, y: 0, width: frame.size.width - timeViewFrameWidth, height: frame.size.height)
+        let textView = UITextView(frame: slideToCancelFrame)
         textView.isEditable = false
         textView.isSelectable = false
         textView.text = NSLocalizedString("slide_to_cancel", comment: "")
         textView.backgroundColor = UIColor.clear
         textView.textColor = UIColor.darkGray
-        return textView
+        
+        containerView.addSubview(textView)
+        return containerView
     }
 
     func addInputToolbarCameraButton() {
@@ -1693,12 +1720,38 @@ extension SKYChatConversationViewController {
                 }
 
                 self.audioRecorder?.record()
+                DispatchQueue.main.async {
+                    self.invalidateRecordingTimer()
+                    print("Voice Recording. Start timer")
+                    self.recordTimer = Timer.scheduledTimer(timeInterval: 0.25, target: self, selector: #selector(self.updateRecordingTime(_:)), userInfo: nil, repeats: true)
+                }
+                
             } catch {
                 // TODO: show dialog
             }
         }
     }
-
+    
+    @objc func updateRecordingTime(_ timer: Timer) {
+        guard let recordingTimeLabel = self.recordingTimeLabel else { return }
+        if let currentTime = self.audioRecorder?.currentTime {
+            let timeString = self.stringFromTimeInterval(currentTime)
+            recordingTimeLabel.text = timeString
+        } else {
+            recordingTimeLabel.text = "00:00"
+        }
+    }
+    
+    func stringFromTimeInterval(_ interval:TimeInterval) -> String {
+        
+        let timeInterval = NSInteger(interval)
+        
+        let seconds = timeInterval % 60
+        let minutes = (timeInterval / 60) % 60
+        
+        return NSString(format: "%0.2d:%0.2d",minutes,seconds) as String
+    }
+    
     func didStartRecord(button: UIButton) {
         print("Voice Recording: Recording Button Did Pressed Down")
 
@@ -1749,7 +1802,13 @@ extension SKYChatConversationViewController {
 
     open func audioRecorderDidFinishRecording(_ recorder: AVAudioRecorder, successfully flag: Bool) {
         print("Voice Recording: Audio Recorder Finished")
-
+        
+        if let recordingTimeLabel = self.recordingTimeLabel {
+            recordingTimeLabel.text = "00:00"
+        }
+        
+        self.invalidateRecordingTimer()
+        
         if !flag || self.isRecordingCancelled {
             print("Voice Recording: Cancelled")
             if self.shouldShowVoiceMessageButton {
