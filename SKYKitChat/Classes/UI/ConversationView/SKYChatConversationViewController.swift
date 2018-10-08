@@ -543,7 +543,6 @@ open class SKYChatConversationViewController: JSQMessagesViewController, AVAudio
     private func invalidateRecordingTimer() {
         self.recordTimer?.invalidate()
         self.recordTimer = nil
-        print("Voice Recording: deinit")
     }
     
     deinit {
@@ -603,16 +602,20 @@ extension SKYChatConversationViewController {
 
         if self.recordButton == nil {
             self.recordButton = {
-                let gesture = UILongPressGestureRecognizer(
+                let longPressGesture = UILongPressGestureRecognizer(
                     target: self,
                     action: #selector(recordingButtonDidLongPressed(gesture:)))
-                gesture.minimumPressDuration = 0.01
-
+                longPressGesture.minimumPressDuration = 0.5
+                
+                let singleTapGesture = UITapGestureRecognizer(target: self,
+                                                              action: #selector(recordingButtonDidSingleTapped(gesture:)))
+                
                 let image = UIImage(named: "icon-mic", in: self.bundle(), compatibleWith: nil)
                 let btn = UIButton(type: .custom)
                 btn.setImage(image, for: .normal)
                 btn.tintColor = self.sendButton?.tintColor ?? self.view.tintColor
-                btn.addGestureRecognizer(gesture)
+                btn.addGestureRecognizer(longPressGesture)
+                btn.addGestureRecognizer(singleTapGesture)
                 return btn
             }()
         }
@@ -1290,8 +1293,31 @@ extension SKYChatConversationViewController {
 
         self.showTypingIndicator = false
     }
+    
+    @objc func recordingButtonDidSingleTapped(gesture: UITapGestureRecognizer) {
+        if #available(iOS 10.0, *) {
+            let generator = UIImpactFeedbackGenerator(style: .light)
+            generator.impactOccurred()
+        }
+        
+        guard let recordButton = self.recordButton else { return }
+        UIView.animate(withDuration: 0.2, animations: {
+            recordButton.transform = CGAffineTransform.init(scaleX: 0.1, y: 0.1)
+            recordButton.alpha = 0
+        }) { _ in
+            UIView.animate(withDuration: 0.2, animations: {
+                recordButton.transform = CGAffineTransform.identity
+                recordButton.alpha = 1
+            })
+        }
+    }
 
     @objc func recordingButtonDidLongPressed(gesture: UILongPressGestureRecognizer) {
+        if #available(iOS 10.0, *) {
+            let generator = UIImpactFeedbackGenerator(style: .light)
+            generator.impactOccurred()
+        }
+        
         if gesture.state == .began {
             self.didStartRecord(button: self.recordButton!)
         } else {
@@ -1754,7 +1780,8 @@ extension SKYChatConversationViewController {
     
     func didStartRecord(button: UIButton) {
         print("Voice Recording: Recording Button Did Pressed Down")
-
+        self.recordButton?.isEnabled = false
+        
         let recordingSession = AVAudioSession.sharedInstance()
         if recordingSession.recordPermission() == .granted {
             do {
@@ -1808,6 +1835,7 @@ extension SKYChatConversationViewController {
         }
         
         self.invalidateRecordingTimer()
+        self.recordButton?.isEnabled = true
         
         if !flag || self.isRecordingCancelled {
             print("Voice Recording: Cancelled")
