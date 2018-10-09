@@ -1417,7 +1417,7 @@ extension SKYChatConversationViewController {
                 if let error = error {
                     print("Failed to send message: \(error.localizedDescription)")
                     self.failedToSend(message: msg,
-                                      errorCode: SKYErrorCode(rawValue: (error as NSError).code) ?? SKYErrorBadResponse,
+                                      errorCode: SKYErrorCode(rawValue: (error as NSError).code) ?? SKYErrorAccessTokenNotAccepted,
                                       errorMessage: error.localizedDescription)
                     return
                 }
