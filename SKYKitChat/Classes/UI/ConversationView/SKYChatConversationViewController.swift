@@ -1414,11 +1414,11 @@ extension SKYChatConversationViewController {
             msg,
             to: conv,
             completion: {(result, error) in
-                guard error == nil else {
-                    print("Failed to send message: \(error!.localizedDescription)")
+                if let error = error {
+                    print("Failed to send message: \(error.localizedDescription)")
                     self.failedToSend(message: msg,
-                                      errorCode: SKYErrorBadResponse,
-                                      errorMessage: error!.localizedDescription)
+                                      errorCode: SKYErrorCode(rawValue: (error as NSError).code) ?? SKYErrorBadResponse,
+                                      errorMessage: error.localizedDescription)
                     return
                 }
 
