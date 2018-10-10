@@ -1389,10 +1389,6 @@ extension SKYChatConversationViewController {
         self.messageList.append([msg])
         self.collectionView?.reloadData()
 
-        if self.shouldShowVoiceMessageButton {
-            self.inputToolbarSendButtonState = .record
-        }
-
         DispatchQueue.main.async {
             self.scrollToBottom(animated: true)
             self.finishSendingMessage(animated: true)
@@ -1400,6 +1396,10 @@ extension SKYChatConversationViewController {
 
         self.skygear.chatExtension?.sendTypingIndicator(.finished, in: self.conversation!)
         self.delegate?.conversationViewController?(self, readyToSendMessage: msg)
+        
+        if self.shouldShowVoiceMessageButton {
+            self.inputToolbarSendButtonState = .record
+        }
     }
 
     func send(message msg: SKYMessage, done: ((_ sentMsg: SKYMessage) -> Void)? = nil) {
@@ -1835,7 +1835,6 @@ extension SKYChatConversationViewController {
         }
         
         self.invalidateRecordingTimer()
-        self.recordButton?.isEnabled = true
         
         if !flag || self.isRecordingCancelled {
             print("Voice Recording: Cancelled")
