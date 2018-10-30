@@ -2192,7 +2192,13 @@ extension SKYChatConversationViewController {
                         strongSelf.messageList.remove(cachedMessages)
                     }
                 }
-                strongSelf.messageList.merge(msgs)
+                if #available(iOS 12, *) {
+                    if !isCached {
+                        strongSelf.messageList.merge(msgs)
+                    }
+                } else {
+                    strongSelf.messageList.merge(msgs)
+                }
                 // NOTE(cheungpat): Since we are fetching messages from
                 // the servers, these messages are assumed to be successful.
                 // Removing the failed operations because existence of
