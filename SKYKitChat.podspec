@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'SKYKitChat'
-  s.version          = '1.6.2.10'
+  s.version          = '1.6.2.11'
   s.summary          = 'Chat extension for SKYKit'
 
   s.description      = <<-DESC
@@ -40,7 +40,7 @@ This is the client library for the Skygear Chat extension.
     sp.dependency 'CTAssetsPickerController',          '~> 3.3.1'
     sp.dependency 'SKPhotoBrowser',                    '~> 5.0.5'
     sp.dependency 'JSQSystemSoundPlayer',              '~> 2.0.1'
-    sp.dependency 'JSQMessagesViewController-Skygear', '~> 7.3.5.4'
+    sp.dependency 'JSQMessagesViewController-Skygear', '~> 7.3.5.4.3'
   end
 
 end
