@@ -194,7 +194,7 @@ open class MessageList: NSObject {
     }
 
     public func compare(messageA: SKYMessage, messageB: SKYMessage) -> Bool {
-        guard let aDate = messageA.creationDate, let bDate = messageB.creationDate else { return false }
+        guard let aDate = messageA.creationDate, let bDate = messageB.creationDate else { return true }
         return aDate < bDate
     }
 
@@ -539,12 +539,12 @@ open class SKYChatConversationViewController: JSQMessagesViewController, AVAudio
 
         super.awakeFromNib()
     }
-    
+
     private func invalidateRecordingTimer() {
         self.recordTimer?.invalidate()
         self.recordTimer = nil
     }
-    
+
     deinit {
         invalidateRecordingTimer()
     }
@@ -606,10 +606,10 @@ extension SKYChatConversationViewController {
                     target: self,
                     action: #selector(recordingButtonDidLongPressed(gesture:)))
                 longPressGesture.minimumPressDuration = 0.5
-                
+
                 let singleTapGesture = UITapGestureRecognizer(target: self,
                                                               action: #selector(recordingButtonDidSingleTapped(gesture:)))
-                
+
                 let image = UIImage(named: "icon-mic", in: self.bundle(), compatibleWith: nil)
                 let btn = UIButton(type: .custom)
                 btn.setImage(image, for: .normal)
@@ -677,7 +677,7 @@ extension SKYChatConversationViewController {
         timeView.addSubview(textLabel)
         containerView.addSubview(timeView)
         self.recordingTimeLabel = textLabel
-        
+
         let slideToCancelFrame = CGRect(x: timeViewFrameWidth, y: 0, width: frame.size.width - timeViewFrameWidth, height: frame.size.height)
         let textView = UITextView(frame: slideToCancelFrame)
         textView.isEditable = false
@@ -685,7 +685,7 @@ extension SKYChatConversationViewController {
         textView.text = NSLocalizedString("slide_to_cancel", comment: "")
         textView.backgroundColor = UIColor.clear
         textView.textColor = UIColor.darkGray
-        
+
         containerView.addSubview(textView)
         return containerView
     }
@@ -1293,13 +1293,13 @@ extension SKYChatConversationViewController {
 
         self.showTypingIndicator = false
     }
-    
+
     @objc func recordingButtonDidSingleTapped(gesture: UITapGestureRecognizer) {
         if #available(iOS 10.0, *) {
             let generator = UIImpactFeedbackGenerator(style: .light)
             generator.impactOccurred()
         }
-        
+
         guard let recordButton = self.recordButton else { return }
         UIView.animate(withDuration: 0.2, animations: {
             recordButton.transform = CGAffineTransform.init(scaleX: 0.1, y: 0.1)
@@ -1317,7 +1317,7 @@ extension SKYChatConversationViewController {
             let generator = UIImpactFeedbackGenerator(style: .light)
             generator.impactOccurred()
         }
-        
+
         if gesture.state == .began {
             self.didStartRecord(button: self.recordButton!)
         } else {
@@ -1396,7 +1396,7 @@ extension SKYChatConversationViewController {
 
         self.skygear.chatExtension?.sendTypingIndicator(.finished, in: self.conversation!)
         self.delegate?.conversationViewController?(self, readyToSendMessage: msg)
-        
+
         if self.shouldShowVoiceMessageButton {
             self.inputToolbarSendButtonState = .record
         }
@@ -1751,13 +1751,13 @@ extension SKYChatConversationViewController {
                     print("Voice Recording. Start timer")
                     self.recordTimer = Timer.scheduledTimer(timeInterval: 0.25, target: self, selector: #selector(self.updateRecordingTime(_:)), userInfo: nil, repeats: true)
                 }
-                
+
             } catch {
                 // TODO: show dialog
             }
         }
     }
-    
+
     @objc func updateRecordingTime(_ timer: Timer) {
         guard let recordingTimeLabel = self.recordingTimeLabel else { return }
         if let currentTime = self.audioRecorder?.currentTime {
@@ -1767,21 +1767,21 @@ extension SKYChatConversationViewController {
             recordingTimeLabel.text = "00:00"
         }
     }
-    
+
     func stringFromTimeInterval(_ interval:TimeInterval) -> String {
-        
+
         let timeInterval = NSInteger(interval)
-        
+
         let seconds = timeInterval % 60
         let minutes = (timeInterval / 60) % 60
-        
+
         return NSString(format: "%0.2d:%0.2d",minutes,seconds) as String
     }
-    
+
     func didStartRecord(button: UIButton) {
         print("Voice Recording: Recording Button Did Pressed Down")
         self.recordButton?.isEnabled = false
-        
+
         let recordingSession = AVAudioSession.sharedInstance()
         if recordingSession.recordPermission() == .granted {
             do {
@@ -1829,13 +1829,13 @@ extension SKYChatConversationViewController {
 
     open func audioRecorderDidFinishRecording(_ recorder: AVAudioRecorder, successfully flag: Bool) {
         print("Voice Recording: Audio Recorder Finished")
-        
+
         if let recordingTimeLabel = self.recordingTimeLabel {
             recordingTimeLabel.text = "00:00"
         }
-        
+
         self.invalidateRecordingTimer()
-        
+
         if !flag || self.isRecordingCancelled {
             print("Voice Recording: Cancelled")
             if self.shouldShowVoiceMessageButton {
