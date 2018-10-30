@@ -37,6 +37,7 @@ import JSQMessagesViewController
     case right
 }
 
+
 @objc public protocol SKYChatConversationViewControllerDelegate: class {
 
     @objc optional func messagesFetchLimitInConversationViewController(
@@ -682,7 +683,7 @@ extension SKYChatConversationViewController {
         let textView = UITextView(frame: slideToCancelFrame)
         textView.isEditable = false
         textView.isSelectable = false
-        textView.text = NSLocalizedString("slide_to_cancel", comment: "")
+        textView.text = SKYChatConversationView.UICustomization().textCustomization.controlsSlideToCancel
         textView.backgroundColor = UIColor.clear
         textView.textColor = UIColor.darkGray
 

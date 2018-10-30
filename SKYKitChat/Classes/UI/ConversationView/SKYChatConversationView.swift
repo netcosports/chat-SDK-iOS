@@ -47,6 +47,7 @@ public class SKYChatConversationViewTextCustomization: NSObject {
     public var messageStatusSomeRead = NSLocalizedString("Some read", comment: "")
     public var messageStatusDelivered = NSLocalizedString("Delivered", comment: "")
     public var messageStatusDelivering = NSLocalizedString("Delivering", comment: "")
+    public var controlsSlideToCancel = NSLocalizedString("Slide to cancel", comment: "")
 
     public func getMessageStatus(_ status: SKYMessageConversationStatus) -> String {
         switch status {
