@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'SKYKitChat'
-  s.version          = '1.7.0.2'
+  s.version          = '1.7.0.3'
   s.summary          = 'Chat extension for SKYKit'
 
   s.description      = <<-DESC
@@ -25,7 +25,7 @@ This is the client library for the Skygear Chat extension.
         ]
     }
 
-    sp.dependency 'SKYKit/Core', '~> 1.7'
+    sp.dependency 'SKYKit/Core', '~> 1.4'
     sp.dependency 'Realm', '~> 3.0.1'
   end
 
