@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'SKYKitChat'
-  s.version          = '1.7.0.1'
+  s.version          = '1.7.0.2'
   s.summary          = 'Chat extension for SKYKit'
 
   s.description      = <<-DESC
@@ -20,7 +20,8 @@ This is the client library for the Skygear Chat extension.
     sp.source_files = 'SKYKitChat/Classes/Core/**/*'
     sp.resource_bundles = {
         'SKYKitChatUI' => [
-            'SKYKitChat/Assets/*.xcassets'
+            'SKYKitChat/Assets/*.xcassets',
+            'SKYKitChat/Assets/*.lproj/*.strings'
         ]
     }
 

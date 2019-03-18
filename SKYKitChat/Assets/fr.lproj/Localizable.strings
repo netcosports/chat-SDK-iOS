@@ -1,0 +1,9 @@
+// 3
+"conversation_error_alert_title" = "Impossible d'envoyer un message vocal";
+"conversation_error_alert_message_failed" = "Failed to construct voice data";
+"conversation_error_alert_message_permissions" = "Microphone permission is needed for sending voice message. Please grant the permission in the application Settings.";
+"conversation_error_alert_button_ok" = "OK";
+"conversation_error_alert_button_actions" = "Actes";
+"conversation_error_alert_button_photo" = "Photo";
+"conversation_error_alert_button_settings" = "Réglages";
+"conversation_error_alert_button_cancel" = "Annuler";
