@@ -27,27 +27,29 @@ PODS:
     - Realm/Headers (= 3.0.2)
   - Realm/Headers (3.0.2)
   - SKPhotoBrowser (5.0.5)
-  - SKYKit/Core (1.6.0):
+  - SKYKit/Core (1.7.1):
     - MagicKit-Skygear (~> 0.0.6)
     - SocketRocket (~> 0.4)
-  - SKYKitChat (1.6.3):
-    - SKYKitChat/Core (= 1.6.3)
-  - SKYKitChat/Core (1.6.3):
+    - UICKeyChainStore (~> 2.1.0)
+  - SKYKitChat (1.7.0):
+    - SKYKitChat/Core (= 1.7.0)
+  - SKYKitChat/Core (1.7.0):
     - Realm (~> 3.0.1)
-    - SKYKit/Core (~> 1.4)
-  - SKYKitChat/UI (1.6.3):
+    - SKYKit/Core (~> 1.7)
+  - SKYKitChat/UI (1.7.0):
     - ALCameraViewController (~> 3.0)
     - CTAssetsPickerController (~> 3.3.1)
     - JSQMessagesViewController-Skygear (~> 7.3.5.4)
     - JSQSystemSoundPlayer (~> 2.0.1)
     - LruCache (~> 0.1)
     - SKPhotoBrowser (~> 5.0.5)
-    - SKYKit/Core (~> 1.4)
+    - SKYKit/Core (~> 1.7)
     - SKYKitChat/Core
     - SVProgressHUD (~> 2.2)
   - SocketRocket (0.5.1)
   - Specta (1.0.7)
   - SVProgressHUD (2.2.5)
+  - UICKeyChainStore (2.1.2)
 
 DEPENDENCIES:
   - Expecta
@@ -75,6 +77,7 @@ SPEC REPOS:
     - SocketRocket
     - Specta
     - SVProgressHUD
+    - UICKeyChainStore
 
 EXTERNAL SOURCES:
   SKYKitChat:
@@ -98,6 +101,7 @@ SPEC CHECKSUMS:
   SocketRocket: d57c7159b83c3c6655745cd15302aa24b6bae531
   Specta: 3e1bd89c3517421982dc4d1c992503e48bd5fe66
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
+  UICKeyChainStore: 85db518bb1d294366d15ec9b92a416c4e670518f
 
 PODFILE CHECKSUM: 08bcd5e3aaa34705dce7fb1d8f9e85fa4957abc7
 
