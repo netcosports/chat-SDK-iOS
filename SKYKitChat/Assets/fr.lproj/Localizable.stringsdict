@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>newsroom_days_count</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@days_count@</string>
+		<key>days_count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>zero</key>
+			<string>il y a %d jours</string>
+			<key>one</key>
+			<string>il y a %d jour</string>
+			<key>two</key>
+			<string>il y a %d jours</string>
+			<key>few</key>
+			<string>il y a %d jours</string>
+			<key>many</key>
+			<string>il y a %d jours</string>
+			<key>other</key>
+			<string>il y a %d jours</string>
+		</dict>
+	</dict>
+	<key>newsroom_hours_count</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@hours_count@</string>
+		<key>hours_count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>zero</key>
+			<string>il y a %d heures</string>
+			<key>one</key>
+			<string>il y a %d heure</string>
+			<key>two</key>
+			<string>il y a %d heures</string>
+			<key>few</key>
+			<string>il y a %d heures</string>
+			<key>many</key>
+			<string>il y a %d heures</string>
+			<key>other</key>
+			<string>il y a %d heures</string>
+		</dict>
+	</dict>
+	<key>newsroom_minutes_count</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@minutes_count@</string>
+		<key>minutes_count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>zero</key>
+			<string>il y a %d minutes</string>
+			<key>one</key>
+			<string>il y a %d minute</string>
+			<key>two</key>
+			<string>il y a %d minutes</string>
+			<key>few</key>
+			<string>il y a %d minutes</string>
+			<key>many</key>
+			<string>il y a %d minutes</string>
+			<key>other</key>
+			<string>il y a %d minutes</string>
+		</dict>
+	</dict>
+</dict>
+</plist>

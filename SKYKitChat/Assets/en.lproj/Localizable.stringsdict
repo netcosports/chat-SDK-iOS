@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>newsroom_days_count</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@days_count@</string>
+		<key>days_count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>zero</key>
+			<string>%d days ago</string>
+			<key>one</key>
+			<string>%d day ago</string>
+			<key>two</key>
+			<string>%d days ago</string>
+			<key>few</key>
+			<string>%d days ago</string>
+			<key>many</key>
+			<string>%d days ago</string>
+			<key>other</key>
+			<string>%d days ago</string>
+		</dict>
+	</dict>
+	<key>newsroom_hours_count</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@hours_count@</string>
+		<key>hours_count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>zero</key>
+			<string>%d hours ago</string>
+			<key>one</key>
+			<string>%d hour ago</string>
+			<key>two</key>
+			<string>%d hours ago</string>
+			<key>few</key>
+			<string>%d hours ago</string>
+			<key>many</key>
+			<string>%d hours ago</string>
+			<key>other</key>
+			<string>%d hours ago</string>
+		</dict>
+	</dict>
+	<key>newsroom_minutes_count</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@minutes_count@</string>
+		<key>minutes_count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>zero</key>
+			<string>%d minutes ago</string>
+			<key>one</key>
+			<string>%d minute ago</string>
+			<key>two</key>
+			<string>%d minutes ago</string>
+			<key>few</key>
+			<string>%d minutes ago</string>
+			<key>many</key>
+			<string>%d minutes ago</string>
+			<key>other</key>
+			<string>%d minutes ago</string>
+		</dict>
+	</dict>
+</dict>
+</plist>
