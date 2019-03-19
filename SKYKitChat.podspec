@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'SKYKitChat'
-  s.version          = '1.7.0.4'
+  s.version          = '1.7.0.5'
   s.summary          = 'Chat extension for SKYKit'
 
   s.description      = <<-DESC
