@@ -1799,7 +1799,8 @@ extension SKYChatConversationViewController {
         print("Cannot start recording session.")
       }
     } else {
-      recordingSession.requestRecordPermission() { allowed in
+      recordingSession.requestRecordPermission() { [weak self] allowed in
+        self?.recordButton?.isEnabled = true
         if !allowed {
           DispatchQueue.main.async { [weak self] in
             self?.showPermissionDeniedAlert()
