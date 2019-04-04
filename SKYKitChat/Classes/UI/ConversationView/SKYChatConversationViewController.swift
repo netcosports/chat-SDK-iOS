@@ -1482,6 +1482,7 @@ extension SKYChatConversationViewController {
   open override func textViewDidChange(_ textView: UITextView) {
     super.textViewDidChange(textView)
 
+    guard !(self.inputTextView?.isHidden ?? true) else { return }
     if self.shouldShowVoiceMessageButton && textView.text.count == 0 {
       self.inputToolbarSendButtonState = .record
     } else {
